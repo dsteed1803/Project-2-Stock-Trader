@@ -2,23 +2,29 @@
     <nav class="navbar navbar-default">
         <div class="container-fluid">
             <div class="navbar-header">
-                <!--ToDo: Create a router-link that goes to '/' root, add class navbar-brand and add Stock Trader text-->
+                <router-link to="/" class="navbar-brand">Stock Trader</router-link>
+                <!--ToDo: Create a router-link that goes to '/' root, add class navbar-brand and add Stock Trader text done-->
             </div>
             <div class="collapse navbar-collapse">
                 <ul class="nav navbar-nav">
-                    <!--ToDo: Create router-link that goes to '/portfolio'
-                        <!--ToDo: set activeClass to "active", add tag attribute set to li, and add Portfolio text-->
+                    <router-link to="/portfolio" active-class="active" tag="li" exact>Portfolio</router-link>
 
+                    <!--ToDo: Create router-link that goes to '/portfolio'
+                        <!--ToDo: set activeClass to "active", add tag attribute set to li, and add Portfolio text done2-->
+
+                    <router-link to="/stocks" active-class="active" tag="li">Stocks</router-link>
                     <!--ToDo: Create router-link that goes to '/stocks'
-                        <!--ToDo: set activeClass to "active", add tag attribute set to li, and add Stocks text-->
+                        <!--ToDo: set activeClass to "active", add tag attribute set to li, and add Stocks text done2-->
                 </ul>
                 <strong class="navbar-text navbar-right">Funds:
+                    {{ funds | currency }}
                     <!--ToDo: Call funds computed function and pipe the currency filter that is created in main.js-->
+
                 </strong>
                 <ul class="nav navbar-nav navbar-right">
                     <li>
                         <!--ToDo: Add click event to <a> that calls endDay method-->
-                        <a href="#" >End Day</a>
+                        <a @click="endDay" href="#" >End Day</a>
                     </li>
 
                     <!--ToDo: Inside <li> Bind to class using :class that passes an object {} called open and set it to isDropdownOpen-->
@@ -39,17 +45,22 @@
 </template>
 
 <script>
-    //ToDo: Import mapActions from vuex
+    //ToDo: Import mapActions from vuex done
+    import mapActions from 'vuex'
 
     export default {
         data() {
           return {
-              //ToDo: Create data object called isDropdownOpen and set it to false
+            isDropdownOpen = false;
+              //ToDo: Create data object called isDropdownOpen and set it to false done
           }
         },
         computed: {
+          funds () {
+            return this.$store.getters.funds;
+          }
         //ToDo: Create a computed function called funds
-            //ToDo: Have funds() return this.$store.getters.funds
+            //ToDo: Have funds() return this.$store.getters.funds[done2]
         },
         methods: {
             //ToDo: Create ...mapActions method
@@ -57,7 +68,10 @@
                 //ToDo: Call fetchData: 'loadData'
 
             //ToDo: Create endDay method
-                //ToDo: Call randomizeStocks()
+                //ToDo: Call randomizeStocks() [done2]
+          endDay () {
+            randomizeStocks()
+          },
 
             //ToDo: Create SaveData method
                 //ToDo: Create const called data that holds an object
