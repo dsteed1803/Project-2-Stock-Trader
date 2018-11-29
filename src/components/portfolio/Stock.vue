@@ -3,6 +3,7 @@
         <div class="panel panel-info">
             <div class="panel-heading">
                 <h3 class="panel-title">
+                    <p><small>{{stock.name}}</small> Price: {{stock.price}}</p>
                     <!--ToDo: Display the stock.name data object-->
                     <!--ToDo: Inside <small> tags display Price: stock.price | Quantity stock.quantity-->
                 </h3>

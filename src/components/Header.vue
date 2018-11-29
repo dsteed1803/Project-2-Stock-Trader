@@ -18,24 +18,24 @@
                 </ul>
                 <strong class="navbar-text navbar-right">Funds:
                     {{ funds | currency }}
-                    <!--ToDo: Call funds computed function and pipe the currency filter that is created in main.js-->
+                    <!--ToDo: Call funds computed function and pipe the currency filter that is created in main.js done-->
 
                 </strong>
                 <ul class="nav navbar-nav navbar-right">
                     <li>
-                        <!--ToDo: Add click event to <a> that calls endDay method-->
+                        <!--ToDo: Add click event to <a> that calls endDay method done-->
                         <a @click="endDay" href="#" >End Day</a>
                     </li>
 
                     <!--ToDo: Inside <li> Bind to class using :class that passes an object {} called open and set it to isDropdownOpen-->
-                        <!--ToDo: Add click event that toggles isDropdownOpen to true and false-->
-                    <li class="dropdown">
+                        <!--ToDo: Add click event that toggles isDropdownOpen to true and false done2-->
+                    <li class="dropdown" v-bind:class= "{open: isDropdownOpen}" @click="isDropdownOpen = ! isDropdownOpen" >
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Save & Load <span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <!--ToDo: Add click event that calls the saveData method-->
-                            <li><a href="#">Save Data</a></li>
-                            <!--ToDo: Add click event that calls the loadData method-->
-                            <li><a href="#">Load Data</a></li>
+                            <!--ToDo: Add click event that calls the saveData method done-->
+                            <li @click="saveData"><a href="#">Save Data</a></li>
+                            <!--ToDo: Add click event that calls the loadData method done-->
+                            <li @click="loadData"><a href="#">Load Data</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -46,12 +46,12 @@
 
 <script>
     //ToDo: Import mapActions from vuex done
-    import mapActions from 'vuex'
+    import {mapActions} from 'vuex'
 
     export default {
         data() {
           return {
-            isDropdownOpen = false;
+            isDropdownOpen: false
               //ToDo: Create data object called isDropdownOpen and set it to false done
           }
         },
@@ -65,7 +65,12 @@
         methods: {
             //ToDo: Create ...mapActions method
                 //ToDo: Call randomizeStocks: 'randomizeStocks'
-                //ToDo: Call fetchData: 'loadData'
+                //ToDo: Call fetchData: 'loadData' done3
+            ...mapActions ({
+                  randomizeStocks: 'randomizeStocks',
+                  fetchData: 'loadData'
+                }),
+
 
             //ToDo: Create endDay method
                 //ToDo: Call randomizeStocks() [done2]
@@ -78,10 +83,21 @@
                     //ToDo: Set funds: to the $store getters funds
                     //ToDo: Set stockPortfolio: to the $store getters stockPortfolio
                     //ToDo: Set stocks: to the $store getters stocks
-                //ToDo: Outside the data object use $http, using .put pass 'data.json' and the data object
+                //ToDo: Outside the data object use $http, using .put pass 'data.json' and the data object done5
+          saveData () {
+              const data = {
+                funds: $store.getters.funds(),
+                stockPortfolio: $store.getters.stockPortfolio,
+                stocks: $store.getters.stocks
+              };
+              this.$http.put('data.json', data)
+          },
 
             //ToDo: Create loadData method
-                //ToDo: Call fetchData()
+                //ToDo: Call fetchData() done
+          loadData() {
+              fetchdata()
+          }
         }
     }
 </script>

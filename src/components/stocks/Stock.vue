@@ -3,24 +3,27 @@
         <div class="panel panel-success">
             <div class="panel-heading">
                 <h3 class="panel-title">
+                    <small>{{stock.name}}</small> Price: {{stock.price}}
                     <!--ToDo: Display the stock.name data object-->
-                    <!--ToDo: Inside <small> tags display Price: stock.price-->
+                    <!--ToDo: Inside <small> tags display Price: stock.price done2-->
                 </h3>
             </div>
             <div class="panel-body">
                 <div class="pull-left">
                     <!--ToDo: Inside input use v-model.number and pass quantity-->
-                        <!--ToDo: Bind to class using : and pass object called danger that takes in insufficientQuantity-->
-                    <input
+                        <!--ToDo: Bind to class using : and pass object called danger that takes in insufficientFunds done2-->
+                    <input  v-model.number = {quantity}
+                            :class= {danger:insufficientFunds}
                             type="number"
                             class="form-control"
                             placeholder="Quantity">
                 </div>
                 <div class="pull-right">
                     <!--ToDo: Inside the button add a click event that calls buyStock-->
-                    <!--ToDo: Bind to disabled using : and set it equal to insufficientQuantity || quantity is less than or equal to 0 || !Number.isInteger(quantity)-->
-                    <button class="btn btn-success">
-                        <!--ToDo: Display insufficientQuantity data object and add if using ? 'Not Enough' else 'Buy'-->
+                    <!--ToDo: Bind to disabled using : and set it equal to insufficientFunds || quantity is less than or equal to 0 || !Number.isInteger(quantity)-->
+                    <button class="btn btn-success" @click="buyStock" :disabled="insufficientFunds || quantity <= 0 || !Number.isInteger(quantity)" >
+                        <!--ToDo: Display insufficientFunds data object and add if using ? 'Not Enough' else 'Buy' done3-->
+                        {{ insufficientFunds }}
                     </button>
                 </div>
             </div>
@@ -36,28 +39,45 @@
 
 <script>
     export default {
-        //ToDo: Set props equal to stock using array syntax
+        //ToDo: Set props equal to stock using array syntax done
+        props: ['stock'],
 
         data() {
             return {
-                //ToDo: Create data object called quantity and set it to 0
+              quantity: 0
+                //ToDo: Create data object called quantity and set it to 0 done
             }
         },
         computed: {
+          funds() {
+            return this.$store.getters.funds
+          },
             //ToDo: Create a computed function called funds
-                //ToDo: Have funds() return $store.getters.funds
+                //ToDo: Have funds() return $store.getters.funds done2
+          insufficientFunds() {
+            return this.quantity * this.stock.price > this.funds
+          }
 
             //ToDo: Create a computed function called insufficientFunds
-                //ToDo: Have insufficientFunds() return this.quantity * this.stock.price > this.funds
+                //ToDo: Have insufficientFunds() return this.quantity * this.stock.price > this.funds done2
         },
         methods: {
+          buyStock() {
+            const order = {
+              stockId: this.stock.id,
+              stockPrice: this.stock.price,
+              quantity: this.quantity
+            };
+            this.quantity= 0;
+            this.$store.dispatch('buyStock', order)
+          }
             //ToDo: Create buyStock method
                 //ToDo: Create const called order that holds an object
                     //ToDo: Set stockId: to stock.id
                     //ToDo: Set stockPrice: to stock.price
                     //ToDo: Set quantity: to quantity
             //ToDo: Outside the data object $store.dispatch() passing 'buyStock' and order
-            //ToDo: Reset quantity to 0
+            //ToDo: Reset quantity to 0 done7
         }
     }
 </script>
