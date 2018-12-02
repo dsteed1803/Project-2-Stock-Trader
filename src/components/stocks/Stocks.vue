@@ -2,19 +2,27 @@
     <div>
         <!--ToDo: Load app-stock component-->
             <!--ToDo: Loop through stock in stocks using v-for-->
-            <!--ToDo: Bind to stock using : and pass stock from the v-for-->
+            <!--ToDo: Bind to stock using : and pass stock from the v-for done3-->
+        <app-stock :v-for="stock in stocks"></app-stock>
     </div>
 </template>
 
 <script>
-    //ToDo: Import Stock from ./Stock.vue
+    //ToDo: Import Stock from ./Stock.vue done
+    import Stock from './Stock.vue'
 
     export default {
-        //ToDo: Initialize Stock component and name it appStock
+        //ToDo: Initialize Stock component and name it appStock done
+      componenets: {
+        appStock: Stock
+      },
 
-        computed: {
+      computed: {
+        stocks(){
+          return $store.getters.stocks;
+        }
             //ToDo: Create stocks computer method
-                // ToDo: Return $store.getters.stocks
+                // ToDo: Return $store.getters.stocks done2
         }
     }
 </script>

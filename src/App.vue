@@ -30,8 +30,8 @@
 
         //ToDo: On page creation dispatch 'initStocks' to the vuex $store
 
-      created () {
-
+      created() {
+        this.$store('initStocks');
       }
 
     }
