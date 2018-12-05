@@ -6,16 +6,18 @@
                 <!--ToDo: Create a router-link that goes to '/' root, add class navbar-brand and add Stock Trader text done-->
             </div>
             <div class="collapse navbar-collapse">
+                <div>
                 <ul class="nav navbar-nav">
-                    <router-link to="/portfolio" active-class="active" tag="li" exact>Portfolio</router-link>
+                    <router-link to="/portfolio" class="navbar-brand"><a>Portfolio</a></router-link>
 
                     <!--ToDo: Create router-link that goes to '/portfolio'
                         <!--ToDo: set activeClass to "active", add tag attribute set to li, and add Portfolio text done2-->
 
-                    <router-link to="/stocks" active-class="active" tag="li">Stocks</router-link>
+                    <router-link to="/stocks" class="navbar-brand"><a>Stocks</a></router-link>
                     <!--ToDo: Create router-link that goes to '/stocks'
                         <!--ToDo: set activeClass to "active", add tag attribute set to li, and add Stocks text done2-->
                 </ul>
+                </div>
                 <strong class="navbar-text navbar-right">Funds:
                     {{ funds | currency }}
                     <!--ToDo: Call funds computed function and pipe the currency filter that is created in main.js done-->
@@ -75,7 +77,7 @@
             //ToDo: Create endDay method
                 //ToDo: Call randomizeStocks() [done2]
           endDay () {
-            randomizeStocks()
+            this.randomizeStocks()
           },
 
             //ToDo: Create SaveData method
@@ -86,9 +88,9 @@
                 //ToDo: Outside the data object use $http, using .put pass 'data.json' and the data object done5
           saveData () {
               const data = {
-                funds: $store.getters.funds(),
-                stockPortfolio: $store.getters.stockPortfolio,
-                stocks: $store.getters.stocks
+                funds: this.$store.getters.funds,
+                stockPortfolio: this.$store.getters.stockPortfolio,
+                stocks: this.$store.getters.stocks
               };
               this.$http.put('data.json', data)
           },
@@ -96,7 +98,7 @@
             //ToDo: Create loadData method
                 //ToDo: Call fetchData() done
           loadData() {
-              fetchdata()
+              this.fetchData()
           }
         }
     }

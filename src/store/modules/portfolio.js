@@ -5,7 +5,7 @@
 const state = {
   funds: 10000,
   stocks: []
-}
+};
 
 
 //ToDo: Create const called mutations that is a data object{}
@@ -15,27 +15,30 @@ const state = {
         //ToDo: Else push id: stockId and quantity: quantity to state.stocks
         //ToDo: Set state.funds -= stockPrice * quantity
 const mutations = {
-  BUY_STOCK(state, {stockId, quantity, stockPrice}) {
-  const record = state.stocks.find(element => element.id === stockId);
-  if (record) {
-    record.quantity += quantity
-  } else {
-    state.stocks.push(stockId, quantity);
-  }
-  state.funds -= stockPrice * quantity
+  'BUY_STOCK' (state, {stockId, quantity, stockPrice}) {
+    const record = state.stocks.find(element => element.id == stockId);
+    if (record) {
+      record.quantity += quantity
+    } else {
+      state.stocks.push({
+        id: stockId,
+        quantity: quantity
+      });
+    }
+    state.funds -= stockPrice * quantity
   },
 
-  SELL_STOCK(state, {stockId, quantity, stockPrice}) {
-    const record = state.stocks.find(element => element.id === stockId)
+  'SELL_STOCK' (state, {stockId, quantity, stockPrice}) {
+    const record = state.stocks.find(element => element.id == stockId);
     if (record.quantity > quantity) {
       record.quantity -= quantity
     }
     else {
-      state.stocks.splice(state.stocks.indexOf(record, 1))
+      state.stocks.splice(state.stocks.indexOf(record), 1)
     }
     state.funds += stockPrice * quantity
   },
-  SET_PORTFOLIO(state, portfolio) {
+  'SET_PORTFOLIO' (state, portfolio) {
     state.funds = portfolio.funds;
     state.stocks = portfolio.stockPortfolio ? portfolio.stockPortfolio : [];
   }
@@ -79,6 +82,23 @@ const actions = {
         //ToDo: Return state.funds
 
 //TODO *****************************************************************
+
+const getters = {
+ stockPortfolio(state, getters){
+   return state.stocks.map(stock => {
+     const record = getters.stocks.find(element => element.id == stock.id);
+     return {
+       id: stock.id,
+       quantity: stock.quantity,
+       name: record.name,
+       price: record.price
+     }
+   });
+ },
+ funds(state){
+   return state.funds;
+ }
+};
 
 // const getters = {
 //   stockPortfolio (state, getters) {

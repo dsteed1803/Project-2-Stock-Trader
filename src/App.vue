@@ -18,11 +18,6 @@
     //ToDo: Import Header Component done
 
     export default {
-      data() {
-        return {
-
-        }
-      },
       components: {
         appHeader: Header
       },
@@ -31,7 +26,7 @@
         //ToDo: On page creation dispatch 'initStocks' to the vuex $store
 
       created() {
-        this.$store('initStocks');
+        this.$store.dispatch('initStocks');
       }
 
     }

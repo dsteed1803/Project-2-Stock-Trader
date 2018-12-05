@@ -12,12 +12,13 @@ const state = {
         //ToDo: Inside 'SET_STOCKS' set state.stocks equal to stocks done3
 
 const mutations = {
-    SET_STOCKS(state, stocks) {
-      state.stocks=stocks;
+    'SET_STOCKS' (state, stocks) {
+      state.stocks = stocks;
     },
-    RND_STOCKS(state) {
-        state.stocks.forEach(stock);
-        stock.price = Math.round(stock.price * (1 + Math.random() - 0.5));
+    'RND_STOCKS' (state) {
+        state.stocks.forEach(stock => {
+          stock.price = Math.round(stock.price * (1 + Math.random() - 0.5));
+        });
     }
 };
 
@@ -35,14 +36,14 @@ const actions = {
 
     //ToDo: Create initStocks that is a pointer function that passes {commit}
         //ToDo: Use the commit method passing 'SET_STOCKS'  and stocks
-    initStocks: ({commit}, order) => {
-        commit('SET_STOCKS', order);
+    initStocks: ({commit}) => {
+        commit('SET_STOCKS', stocks);
     },
 
     //ToDo: Create randomizeStocks that is a pointer function that passes {commit}
         //ToDo: Use the commit method passing 'RND_STOCKS'
-    randomizeStocks: ({commit}, order) => {
-        commit('RND_STOCKS', order);
+    randomizeStocks: ({commit}) => {
+        commit('RND_STOCKS');
     }
 };
 
@@ -51,7 +52,7 @@ const actions = {
         //ToDo: Return state.stocks
 
 const getters = {
-    stocks: ({commit}, state) => {
+    stocks:  state => {
         return state.stocks
     }
 

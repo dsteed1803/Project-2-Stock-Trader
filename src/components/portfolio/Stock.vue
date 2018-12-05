@@ -72,8 +72,8 @@
                 stockPrice: this.stock.price,
                 quantity: this.quantity
               };
+              this.$store.dispatch("sellStock", order);
               this.quantity=0;
-              this.$store.dispatch('buystock', order);
           }
 
             //ToDo: Create sellStock method

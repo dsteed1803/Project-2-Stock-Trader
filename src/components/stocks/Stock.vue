@@ -4,26 +4,21 @@
             <div class="panel-heading">
                 <h3 class="panel-title">
                     <small>{{stock.name}}</small> Price: {{stock.price}}
-                    <!--ToDo: Display the stock.name data object-->
-                    <!--ToDo: Inside <small> tags display Price: stock.price done2-->
                 </h3>
             </div>
             <div class="panel-body">
                 <div class="pull-left">
                     <!--ToDo: Inside input use v-model.number and pass quantity-->
                         <!--ToDo: Bind to class using : and pass object called danger that takes in insufficientFunds done2-->
-                    <input  v-model.number = {quantity}
+                    <input  v-model.number ="quantity"
                             :class= {danger:insufficientFunds}
                             type="number"
                             class="form-control"
                             placeholder="Quantity">
                 </div>
                 <div class="pull-right">
-                    <!--ToDo: Inside the button add a click event that calls buyStock-->
-                    <!--ToDo: Bind to disabled using : and set it equal to insufficientFunds || quantity is less than or equal to 0 || !Number.isInteger(quantity)-->
                     <button class="btn btn-success" @click="buyStock" :disabled="insufficientFunds || quantity <= 0 || !Number.isInteger(quantity)" >
-                        <!--ToDo: Display insufficientFunds data object and add if using ? 'Not Enough' else 'Buy' done3-->
-                        {{ insufficientFunds }}
+                        {{ insufficientFunds ? 'Not Enough' : 'Buy' }}
                     </button>
                 </div>
             </div>
@@ -39,9 +34,7 @@
 
 <script>
     export default {
-        //ToDo: Set props equal to stock using array syntax done
-        props: ['stock'],
-
+        props: ["stock"],
         data() {
             return {
               quantity: 0
@@ -68,8 +61,8 @@
               stockPrice: this.stock.price,
               quantity: this.quantity
             };
-            this.quantity= 0;
-            this.$store.dispatch('buyStock', order)
+            this.$store.dispatch('buyStock', order);
+            this.quantity = 0;
           }
             //ToDo: Create buyStock method
                 //ToDo: Create const called order that holds an object

@@ -10,22 +10,22 @@ import VueResource from 'vue-resource';
 //ToDo: Import routes.js and use the {} passing routes
 //ToDo: Import store/store.js and name it store [done 3]
 
-import App from 'App.vue';
+import App from './App.vue';
 import {routes} from './routes.js';
 import store from './store/store.js';
 
 //ToDo Initialize VueRouter using Vue.use()
 //ToDo Initialize VueResource using Vue.use() [done2]
 
-Vue.use(VueRouter)
-Vue.use(VueResource)
+Vue.use(VueRouter);
+Vue.use(VueResource);
 
-Vue.http.options.root = 'https://final-project-c4608.firebaseio.com/'
+Vue.http.options.root = 'https://final-project-c4608.firebaseio.com/';
 //ToDo: Set Equal to your Firebase Database URL done
 
 Vue.filter('currency', (value) => {
   //ToDo: Return value.toLocalString(), Add $ sign before the value done
-  return "$" + value.toLocalString()
+  return "$" + value.toLocaleString()
 });
 
 const router = new VueRouter({
@@ -42,4 +42,4 @@ new Vue({
     //ToDo: Pass the router constant to vue application done
     //ToDo: Pass store constant to vue application, done
   render: h => h(App)
-})
+});
